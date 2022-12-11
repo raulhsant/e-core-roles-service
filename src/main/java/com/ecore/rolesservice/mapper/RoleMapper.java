@@ -2,7 +2,9 @@ package com.ecore.rolesservice.mapper;
 
 import com.ecore.rolesservice.model.Role;
 import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.NullValueMappingStrategy;
 
 import java.util.List;
 
@@ -11,5 +13,6 @@ public interface RoleMapper {
 
     RoleResponseBody toRoleResponseBody(Role role);
 
-    List<RoleResponseBody> toRoleResponseBody(List<Role> roles);
+    @IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
+    List<RoleResponseBody> toRoleResponseBodyList(List<Role> roles);
 }

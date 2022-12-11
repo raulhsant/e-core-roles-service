@@ -6,10 +6,12 @@ import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import com.ecore.rolesservice.service.MembershipService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
@@ -26,7 +28,6 @@ public class MembershipsController {
 
     @ApiOperation(value = "Assign role to a membership")
     @PostMapping(path = "/{teamId}/{userId}/assign/{role}", produces = MediaType.APPLICATION_JSON_VALUE)
-    //todo: AssignRoleResponseBody?
     public ResponseEntity<MembershipResponseBody> assignRole(@PathVariable("role") String role,
                                                              @PathVariable("teamId") @NotBlank String teamId,
                                                              @PathVariable("userId") @NotBlank String userId) {
@@ -34,12 +35,12 @@ public class MembershipsController {
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }
 
-    //todo: avaliar migrar isso aqui...
     @ApiOperation(value = "Check if membership has role")
-    @GetMapping(path = "/{teamId}/{userId}/isMember/{role}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MembershipResponseBody> findRoleForMembership(@PathVariable("role") @NotBlank String roleName,
-                                                                        @PathVariable("teamId") @NotBlank String teamId,
-                                                                        @PathVariable("userId") @NotBlank String userId) {
+    @ApiResponse(responseCode = "204", description = "Not a member")
+    @GetMapping(path = "/{teamId}/{userId}", params = {"role"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MembershipResponseBody> verifyRoleForMembership(@PathVariable("teamId") @NotBlank @Validated String teamId,
+                                                                          @PathVariable("userId") @NotBlank @Validated String userId,
+                                                                          @RequestParam("role") @NotBlank @Validated String roleName) {
         return membershipService.checkRoleAssigment(roleName, teamId, userId)
                 .map(membershipMapper::toMembershipResponseBody)
                 .map(ResponseEntity::ok)

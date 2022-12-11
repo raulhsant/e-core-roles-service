@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -25,13 +26,13 @@ public class TeamService {
     }
 
 
+    @SneakyThrows
     public boolean isNotTeamMember(String userId, String teamId) {
         var team = this.getTeam(teamId);
         return !team.getTeamMemberIds().contains(userId);
     }
 
-    @SneakyThrows
-    private TeamResponseBody getTeam(String teamId) {
+    private TeamResponseBody getTeam(String teamId) throws IOException, InterruptedException {
         URI uri = UriComponentsBuilder.fromHttpUrl(url)
                 .path("/{teamId}")
                 .build(teamId);
@@ -43,10 +44,10 @@ public class TeamService {
     }
 
     private TeamResponseBody getTeamResponseBody(HttpResponse<Supplier<TeamResponseBody>> response) {
-        if(isSuccess(response)){
+        if (isSuccess(response)) {
             TeamResponseBody responseBody = response.body().get();
             // This is necessary as the response when a team does not exist is a 200 with body "null"
-            return responseBody != null ? responseBody :  new TeamResponseBody();
+            return responseBody != null ? responseBody : new TeamResponseBody();
         }
         return new TeamResponseBody();
     }

@@ -9,3 +9,6 @@ adicionar testes de mutação
 
 Nao me importei se o usuario existe ou nao, apenas se ele pertence o time definido no membership
 
+
+Documentar: jacoco, swagger, pit, teste webmvc
+

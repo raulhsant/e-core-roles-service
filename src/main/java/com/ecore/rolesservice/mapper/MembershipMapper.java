@@ -2,17 +2,26 @@ package com.ecore.rolesservice.mapper;
 
 import com.ecore.rolesservice.AppConstants;
 import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.Role;
 import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.*;
 
 import java.util.List;
 
 @Mapper(componentModel = "jsr330")
 public interface MembershipMapper {
 
-    @Mapping(target = "role", source = "role.name", defaultValue = AppConstants.DEFAULT_ROLE_NAME)
     MembershipResponseBody toMembershipResponseBody(Membership membership);
 
-    List<MembershipResponseBody> toMembershipResponseBody(List<Membership> memberships);
+    default String getRoleName(Role role){
+        if(role == null || StringUtils.isBlank(role.getName())){
+            return AppConstants.DEFAULT_ROLE_NAME;
+        }
+
+        return role.getName();
+    }
+
+    @IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
+    List<MembershipResponseBody> toMembershipResponseBodyList(List<Membership> memberships);
 }
