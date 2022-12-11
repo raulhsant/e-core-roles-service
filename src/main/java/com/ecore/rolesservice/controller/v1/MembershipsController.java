@@ -2,7 +2,7 @@ package com.ecore.rolesservice.controller.v1;
 
 
 import com.ecore.rolesservice.mapper.MembershipMapper;
-import com.ecore.rolesservice.models.dto.membership.MembershipResponseBody;
+import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import com.ecore.rolesservice.service.MembershipService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,9 +40,10 @@ public class MembershipsController {
     public ResponseEntity<MembershipResponseBody> findRoleForMembership(@PathVariable("role") @NotBlank String roleName,
                                                                         @PathVariable("teamId") @NotBlank String teamId,
                                                                         @PathVariable("userId") @NotBlank String userId) {
-        var membershipOptional = membershipService.checkRoleAssigment(roleName, teamId, userId);
-        //todo: Corrigir...
-        return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membershipOptional.get()));
+        return membershipService.checkRoleAssigment(roleName, teamId, userId)
+                .map(membershipMapper::toMembershipResponseBody)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @ApiOperation(value = "Return current role for membership")

@@ -1,8 +1,8 @@
 package com.ecore.rolesservice.service;
 
-import com.ecore.rolesservice.models.Membership;
-import com.ecore.rolesservice.models.Role;
-import com.ecore.rolesservice.models.dto.role.RoleRequestBody;
+import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.Role;
+import com.ecore.rolesservice.model.dto.role.RoleRequestBody;
 import com.ecore.rolesservice.repository.MembershipRepository;
 import com.ecore.rolesservice.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;

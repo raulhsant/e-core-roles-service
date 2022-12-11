@@ -1,6 +1,6 @@
 package com.ecore.rolesservice.repository;
 
-import com.ecore.rolesservice.models.Role;
+import com.ecore.rolesservice.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, String> {

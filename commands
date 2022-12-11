@@ -5,5 +5,5 @@ flush privileges;
 
 
 Decidi não enriquecer/fazer uma migration dos dados de usuario.
-
+adicionar testes de mutação
 

@@ -1,7 +1,7 @@
 package com.ecore.rolesservice.controller.v1.exceptionhandler;
 
 import com.ecore.rolesservice.exception.HttpException;
-import com.ecore.rolesservice.models.dto.ErrorDto;
+import com.ecore.rolesservice.model.dto.ErrorDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

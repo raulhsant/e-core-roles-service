@@ -1,6 +1,5 @@
-package com.ecore.rolesservice.models.dto.role;
+package com.ecore.rolesservice.model.dto.role;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 

@@ -1,6 +1,5 @@
-package com.ecore.rolesservice.models.dto.team;
+package com.ecore.rolesservice.model.dto.team;
 
-import java.util.List;
 import java.util.Set;
 
 import lombok.Data;

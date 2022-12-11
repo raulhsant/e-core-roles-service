@@ -1,7 +1,7 @@
 package com.ecore.rolesservice.mapper;
 
-import com.ecore.rolesservice.models.Role;
-import com.ecore.rolesservice.models.dto.role.RoleResponseBody;
+import com.ecore.rolesservice.model.Role;
+import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
 import org.mapstruct.Mapper;
 
 import java.util.List;

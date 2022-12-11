@@ -1,5 +1,5 @@
 
-package com.ecore.rolesservice.models;
+package com.ecore.rolesservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;

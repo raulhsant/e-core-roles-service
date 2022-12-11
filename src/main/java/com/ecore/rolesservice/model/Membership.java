@@ -1,4 +1,4 @@
-package com.ecore.rolesservice.models;
+package com.ecore.rolesservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
-
-import static com.ecore.rolesservice.AppConstants.DEFAULT_ROLE_NAME;
 
 @Data
 @NoArgsConstructor

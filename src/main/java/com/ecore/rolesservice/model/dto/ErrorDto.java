@@ -1,7 +1,6 @@
-package com.ecore.rolesservice.models.dto;
+package com.ecore.rolesservice.model.dto;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 

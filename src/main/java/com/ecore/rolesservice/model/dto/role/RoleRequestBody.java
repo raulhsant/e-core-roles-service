@@ -1,4 +1,4 @@
-package com.ecore.rolesservice.models.dto.role;
+package com.ecore.rolesservice.model.dto.role;
 
 import javax.validation.constraints.NotBlank;
 

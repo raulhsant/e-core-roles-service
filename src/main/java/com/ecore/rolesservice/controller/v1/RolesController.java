@@ -2,10 +2,10 @@ package com.ecore.rolesservice.controller.v1;
 
 import com.ecore.rolesservice.mapper.MembershipMapper;
 import com.ecore.rolesservice.mapper.RoleMapper;
-import com.ecore.rolesservice.models.Membership;
-import com.ecore.rolesservice.models.dto.membership.MembershipResponseBody;
-import com.ecore.rolesservice.models.dto.role.RoleRequestBody;
-import com.ecore.rolesservice.models.dto.role.RoleResponseBody;
+import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
+import com.ecore.rolesservice.model.dto.role.RoleRequestBody;
+import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
 import com.ecore.rolesservice.service.RolesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

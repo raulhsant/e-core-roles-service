@@ -1,8 +1,8 @@
 package com.ecore.rolesservice.mapper;
 
 import com.ecore.rolesservice.AppConstants;
-import com.ecore.rolesservice.models.Membership;
-import com.ecore.rolesservice.models.dto.membership.MembershipResponseBody;
+import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,4 +1,4 @@
-package com.ecore.rolesservice.models.dto.membership;
+package com.ecore.rolesservice.model.dto.membership;
 
 import lombok.Data;
 

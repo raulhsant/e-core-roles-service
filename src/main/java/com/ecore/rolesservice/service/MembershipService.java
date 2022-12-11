@@ -2,9 +2,9 @@ package com.ecore.rolesservice.service;
 
 import com.ecore.rolesservice.exception.RoleNotFoundException;
 import com.ecore.rolesservice.exception.UserIsNotTeamMemberException;
-import com.ecore.rolesservice.models.Membership;
-import com.ecore.rolesservice.models.MembershipId;
-import com.ecore.rolesservice.models.Role;
+import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.MembershipId;
+import com.ecore.rolesservice.model.Role;
 import com.ecore.rolesservice.repository.MembershipRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,6 @@ public class MembershipService {
 
     public Membership getMembership(String teamId, String userId) {
         Optional<Membership> membershipOptional = membershipRepository.findById(new MembershipId(teamId, userId));
-
         return membershipOptional.orElse(createBaseMembership(teamId, userId));
     }
 

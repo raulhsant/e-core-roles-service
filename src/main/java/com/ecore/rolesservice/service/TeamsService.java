@@ -1,6 +1,6 @@
 package com.ecore.rolesservice.service;
 
-import com.ecore.rolesservice.models.dto.team.TeamResponseBody;
+import com.ecore.rolesservice.model.dto.team.TeamResponseBody;
 import com.ecore.rolesservice.utils.httpbodyhanlders.JsonBodyHandler;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
