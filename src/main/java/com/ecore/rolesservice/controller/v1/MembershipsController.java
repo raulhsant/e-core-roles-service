@@ -28,9 +28,9 @@ public class MembershipsController {
 
     @ApiOperation(value = "Assign role to a membership")
     @PostMapping(path = "/{teamId}/{userId}/assign/{role}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MembershipResponseBody> assignRole(@PathVariable("role") String role,
-                                                             @PathVariable("teamId") String teamId,
-                                                             @PathVariable("userId") String userId) {
+    public ResponseEntity<MembershipResponseBody> assignRole(@PathVariable("teamId") String teamId,
+                                                             @PathVariable("userId") String userId,
+                                                             @PathVariable("role") String role) {
         var membership = membershipService.assignRole(role, teamId, userId);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }

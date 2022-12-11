@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +63,7 @@ class TeamServiceTest {
         final var teamId = TestDataGen.getString();
         final var userId = TestDataGen.getString();
         var team = TestDataGen.getObject(TeamResponseBody.class);
+        team.setTeamMemberIds(Collections.emptySet());
 
         httpClientMock.onGet(TEST_URL).withPath("/" + teamId).doReturn(200, objectMapper.writeValueAsString(team));
 
@@ -79,7 +82,7 @@ class TeamServiceTest {
 
         httpClientMock.onGet(TEST_URL).withPath("/" + teamId).doReturn(200, objectMapper.writeValueAsString(team));
 
-        assertThat(service.isNotTeamMember(null, teamId)).isTrue();
+        assertThat(service.isNotTeamMember(userId, teamId)).isFalse();
 
         httpClientMock.verify().get(TEST_URL).withPath("/" + teamId).called();
     }

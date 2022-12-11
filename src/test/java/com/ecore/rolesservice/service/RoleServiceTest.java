@@ -1,6 +1,7 @@
 package com.ecore.rolesservice.service;
 
 import com.ecore.rolesservice.TestDataGen;
+import com.ecore.rolesservice.model.Membership;
 import com.ecore.rolesservice.model.Role;
 import com.ecore.rolesservice.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
@@ -73,13 +74,15 @@ class RoleServiceTest {
     @Test
     void findMemberships_whenRoleExists_thenReturnMemberships() {
         final var roleName = TestDataGen.getString();
-        final var role = TestDataGen.getObject(Role.class);
+        final var memberships = TestDataGen.getListOfObject(Membership.class);
+        var role = TestDataGen.getObject(Role.class);
+        role.setMemberships(memberships);
 
         when(roleRepository.findById(anyString())).thenReturn(Optional.of(role));
 
         final var response = service.findMemberships(roleName);
 
-        assertThat(response).isEqualTo(role.getMemberships());
+        assertThat(response).isEqualTo(memberships);
 
         verify(roleRepository).findById(roleName);
     }

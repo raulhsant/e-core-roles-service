@@ -4,6 +4,7 @@ import com.ecore.rolesservice.model.dto.team.TeamResponseBody;
 import com.ecore.rolesservice.utils.httpbodyhanlders.JsonBodyHandler;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -53,6 +54,7 @@ public class TeamService {
     }
 
     private boolean isSuccess(HttpResponse response) {
-        return response.statusCode() >= 200 && response.statusCode() < 300;
+        return HttpStatus.valueOf(response.statusCode())
+                .is2xxSuccessful();
     }
 }
