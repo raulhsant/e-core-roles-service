@@ -1,0 +1,29 @@
+server:
+  servlet:
+    context-path: /api/roles-service
+
+variables:
+  teams:
+    url: https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/roles_service
+    username: roles-service
+    password: roles-service-secret
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+#      ddl-auto: create-drop
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+    com:
+      ecore:
+        rolesservice: INFO

@@ -1,0 +1,9 @@
+MARIADB:
+
+GRANT ALL PRIVILEGES ON roles_service. * TO 'roles-service'@'%';
+flush privileges;
+
+
+Decidi não enriquecer/fazer uma migration dos dados de usuario.
+
+
