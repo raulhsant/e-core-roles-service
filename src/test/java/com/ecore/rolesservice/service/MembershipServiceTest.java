@@ -27,9 +27,9 @@ class MembershipServiceTest {
     @InjectMocks
     private MembershipService service;
     @Mock
-    private TeamsService teamsService;
+    private TeamService teamService;
     @Mock
-    private RolesService rolesService;
+    private RoleService rolesService;
     @Mock
     private MembershipRepository membershipRepository;
 
@@ -38,13 +38,13 @@ class MembershipServiceTest {
         final var teamId = TestDataGen.getString();
         final var userId = TestDataGen.getString();
 
-        when(teamsService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.TRUE);
+        when(teamService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.TRUE);
 
         final var exception = assertThrows(UserIsNotTeamMemberException.class, () -> service.assignRole(null, teamId, userId));
 
         assertThat(exception.getError()).contains(userId).contains(teamId);
 
-        verify(teamsService).isNotTeamMember(userId, teamId);
+        verify(teamService).isNotTeamMember(userId, teamId);
         verifyNoInteractions(rolesService);
         verifyNoInteractions(membershipRepository);
     }
@@ -55,14 +55,14 @@ class MembershipServiceTest {
         final var teamId = TestDataGen.getString();
         final var userId = TestDataGen.getString();
 
-        when(teamsService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.FALSE);
+        when(teamService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.FALSE);
         when(rolesService.getById(anyString())).thenReturn(Optional.empty());
 
         final var exception = assertThrows(RoleNotFoundException.class, () -> service.assignRole(roleName, teamId, userId));
 
         assertThat(exception.getError()).contains(roleName);
 
-        verify(teamsService).isNotTeamMember(userId, teamId);
+        verify(teamService).isNotTeamMember(userId, teamId);
         verify(rolesService).getById(roleName);
         verifyNoInteractions(membershipRepository);
     }
@@ -81,7 +81,7 @@ class MembershipServiceTest {
                 .build();
 
 
-        when(teamsService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.FALSE);
+        when(teamService.isNotTeamMember(anyString(), anyString())).thenReturn(Boolean.FALSE);
         when(rolesService.getById(anyString())).thenReturn(Optional.of(role));
         when(membershipRepository.save(any(Membership.class))).thenReturn(membership);
 
@@ -89,7 +89,7 @@ class MembershipServiceTest {
 
         assertThat(response).isEqualTo(membership);
 
-        verify(teamsService).isNotTeamMember(userId, teamId);
+        verify(teamService).isNotTeamMember(userId, teamId);
         verify(rolesService).getById(roleName);
         verify(membershipRepository).save(membership);
     }
@@ -107,7 +107,7 @@ class MembershipServiceTest {
         assertThat(response).isEmpty();
 
         verify(membershipRepository).findByteamIdAndUserIdAndRole(teamId, userId, Role.builder().name(roleName).build());
-        verifyNoInteractions(teamsService);
+        verifyNoInteractions(teamService);
         verifyNoInteractions(rolesService);
     }
 
@@ -127,7 +127,7 @@ class MembershipServiceTest {
         assertThat(response.get().getRole()).isNull();
 
         verify(membershipRepository).findByteamIdAndUserIdAndRole(teamId, userId, Role.builder().name(roleName).build());
-        verifyNoInteractions(teamsService);
+        verifyNoInteractions(teamService);
         verifyNoInteractions(rolesService);
     }
 
@@ -153,7 +153,7 @@ class MembershipServiceTest {
         assertThat(response.get().getRole().getName()).isEqualTo(roleName);
 
         verify(membershipRepository).findByteamIdAndUserIdAndRole(teamId, userId, Role.builder().name(roleName).build());
-        verifyNoInteractions(teamsService);
+        verifyNoInteractions(teamService);
         verifyNoInteractions(rolesService);
     }
 
@@ -172,7 +172,7 @@ class MembershipServiceTest {
         assertThat(response.getRole()).isNull();
 
         verify(membershipRepository).findById(membershipId);
-        verifyNoInteractions(teamsService);
+        verifyNoInteractions(teamService);
         verifyNoInteractions(rolesService);
     }
 
@@ -193,7 +193,7 @@ class MembershipServiceTest {
         assertThat(response).isEqualTo(membership);
 
         verify(membershipRepository).findById(membershipId);
-        verifyNoInteractions(teamsService);
+        verifyNoInteractions(teamService);
         verifyNoInteractions(rolesService);
     }
 }

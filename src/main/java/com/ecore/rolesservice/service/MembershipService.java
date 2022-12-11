@@ -17,13 +17,13 @@ import static com.ecore.rolesservice.AppConstants.DEFAULT_ROLE_NAME;
 @RequiredArgsConstructor
 public class MembershipService {
 
-    private final TeamsService teamsService;
-    private final RolesService rolesService;
+    private final TeamService teamService;
+    private final RoleService rolesService;
     private final MembershipRepository membershipRepository;
 
     public Membership assignRole(String roleName, String teamId, String userId) {
 
-        if (teamsService.isNotTeamMember(userId, teamId)) {
+        if (teamService.isNotTeamMember(userId, teamId)) {
             throw new UserIsNotTeamMemberException(userId, teamId);
         }
 

@@ -14,15 +14,16 @@ import java.net.http.HttpResponse;
 import java.util.function.Supplier;
 
 @Service
-public class TeamsService {
+public class TeamService {
 
     private final HttpClient httpClient;
     @Value("${variables.teams.url}")
     private String url;
 
-    public TeamsService() {
+    public TeamService() {
         httpClient = HttpClient.newHttpClient();
     }
+
 
     public boolean isNotTeamMember(String userId, String teamId) {
         var team = this.getTeam(teamId);
@@ -38,8 +39,16 @@ public class TeamsService {
         var request = HttpRequest.newBuilder(uri).GET().build();
 
         HttpResponse<Supplier<TeamResponseBody>> response = httpClient.send(request, new JsonBodyHandler<>(TeamResponseBody.class));
+        return getTeamResponseBody(response);
+    }
 
-        return isSuccess(response) ? response.body().get() : new TeamResponseBody();
+    private TeamResponseBody getTeamResponseBody(HttpResponse<Supplier<TeamResponseBody>> response) {
+        if(isSuccess(response)){
+            TeamResponseBody responseBody = response.body().get();
+            // This is necessary as the response when a team does not exist is a 200 with body "null"
+            return responseBody != null ? responseBody :  new TeamResponseBody();
+        }
+        return new TeamResponseBody();
     }
 
     private boolean isSuccess(HttpResponse response) {

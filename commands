@@ -7,3 +7,5 @@ flush privileges;
 Decidi não enriquecer/fazer uma migration dos dados de usuario.
 adicionar testes de mutação
 
+Nao me importei se o usuario existe ou nao, apenas se ele pertence o time definido no membership
+

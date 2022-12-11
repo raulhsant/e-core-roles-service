@@ -6,7 +6,7 @@ import com.ecore.rolesservice.model.Membership;
 import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import com.ecore.rolesservice.model.dto.role.RoleRequestBody;
 import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
-import com.ecore.rolesservice.service.RolesService;
+import com.ecore.rolesservice.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RolesController {
 
-    private final RolesService rolesService;
+    private final RoleService rolesService;
     private final RoleMapper roleMapper;
     private final MembershipMapper membershipMapper;
 
@@ -34,7 +34,7 @@ public class RolesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleResponseBody> createRole(@RequestBody @Valid RoleRequestBody requestBody) {
-        var role = rolesService.createRole(requestBody);
+        var role = rolesService.createRole(requestBody.getName());
         return ResponseEntity.ok(roleMapper.toRoleResponseBody(role));
     }
 
