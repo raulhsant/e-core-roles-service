@@ -29,8 +29,8 @@ public class MembershipsController {
     @ApiOperation(value = "Assign role to a membership")
     @PostMapping(path = "/{teamId}/{userId}/assign/{role}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MembershipResponseBody> assignRole(@PathVariable("role") String role,
-                                                             @PathVariable("teamId") @NotBlank String teamId,
-                                                             @PathVariable("userId") @NotBlank String userId) {
+                                                             @PathVariable("teamId") String teamId,
+                                                             @PathVariable("userId") String userId) {
         var membership = membershipService.assignRole(role, teamId, userId);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }
@@ -38,8 +38,8 @@ public class MembershipsController {
     @ApiOperation(value = "Check if membership has role")
     @ApiResponse(responseCode = "204", description = "Not a member")
     @GetMapping(path = "/{teamId}/{userId}", params = {"role"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MembershipResponseBody> verifyRoleForMembership(@PathVariable("teamId") @NotBlank @Validated String teamId,
-                                                                          @PathVariable("userId") @NotBlank @Validated String userId,
+    public ResponseEntity<MembershipResponseBody> verifyRoleForMembership(@PathVariable("teamId") String teamId,
+                                                                          @PathVariable("userId") String userId,
                                                                           @RequestParam("role") @NotBlank @Validated String roleName) {
         return membershipService.checkRoleAssigment(roleName, teamId, userId)
                 .map(membershipMapper::toMembershipResponseBody)
@@ -49,8 +49,8 @@ public class MembershipsController {
 
     @ApiOperation(value = "Return current role for membership")
     @GetMapping(path = "/{teamId}/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MembershipResponseBody> findRoleForMembership(@PathVariable("teamId") @NotBlank String teamId,
-                                                                        @PathVariable("userId") @NotBlank String userId) {
+    public ResponseEntity<MembershipResponseBody> findRoleForMembership(@PathVariable("teamId") String teamId,
+                                                                        @PathVariable("userId") String userId) {
         var membership = membershipService.getMembership(teamId, userId);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }

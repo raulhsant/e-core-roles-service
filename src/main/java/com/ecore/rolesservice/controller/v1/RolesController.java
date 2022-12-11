@@ -9,17 +9,13 @@ import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
 import com.ecore.rolesservice.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,28 +25,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RolesController {
 
-    private final RoleService rolesService;
+    private final RoleService roleService;
     private final RoleMapper roleMapper;
     private final MembershipMapper membershipMapper;
 
     @ApiOperation(value = "Add a new role")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleResponseBody> createRole(@RequestBody @Validated RoleRequestBody requestBody) {
-        var role = rolesService.createRole(requestBody.getName());
+        var role = roleService.createRole(requestBody.getName());
         return ResponseEntity.ok(roleMapper.toRoleResponseBody(role));
     }
 
     @ApiOperation(value = "List existing roles")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RoleResponseBody>> listRoles() {
-        var roles = rolesService.listRoles();
+        var roles = roleService.listRoles();
         return ResponseEntity.ok(roleMapper.toRoleResponseBodyList(roles));
     }
 
     @ApiOperation(value = "List memberships for role")
     @GetMapping(path = "/{role}/memberships", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MembershipResponseBody>> listMembersWithRole(@PathVariable("role") String roleName) {
-        List<Membership> memberships = rolesService.findMemberships(roleName);
+        List<Membership> memberships = roleService.findMemberships(roleName);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBodyList(memberships));
     }
 
