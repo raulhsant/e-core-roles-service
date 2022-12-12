@@ -1,0 +1,5 @@
+# these properties will be used by integration tests.
+
+spring.datasource.url=set_by_test_containers
+spring.datasource.username=set_by_test_containers
+spring.datasource.password=set_by_test_containers
