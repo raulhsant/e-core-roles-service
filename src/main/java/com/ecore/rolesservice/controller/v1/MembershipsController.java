@@ -11,15 +11,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/v1/membership")
-@Api(value = "memberships", tags = "memberships")
-@Tag(name = "memberships", description = "Memberships")
+@Api(value = "memberships", tags = "Memberships")
+@Tag(name = "Memberships", description = "Membership Management")
 @RequiredArgsConstructor
 public class MembershipsController {
 
@@ -37,10 +34,10 @@ public class MembershipsController {
 
     @ApiOperation(value = "Check if membership has role")
     @ApiResponse(responseCode = "204", description = "Not a member")
-    @GetMapping(path = "/{teamId}/{userId}", params = {"role"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{teamId}/{userId}/{role}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MembershipResponseBody> verifyRoleForMembership(@PathVariable("teamId") String teamId,
                                                                           @PathVariable("userId") String userId,
-                                                                          @RequestParam("role") @NotBlank @Validated String roleName) {
+                                                                          @PathVariable("role") String roleName) {
         return membershipService.checkRoleAssigment(roleName, teamId, userId)
                 .map(membershipMapper::toMembershipResponseBody)
                 .map(ResponseEntity::ok)
