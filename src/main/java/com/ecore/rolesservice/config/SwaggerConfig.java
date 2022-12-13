@@ -27,8 +27,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("E-Core Challenge - Roles Service")
-                .description("E-Core Java challenge implementation")
+                .title("e-Core Challenge - Roles Service")
+                .description("e-Core Java challenge implementation")
                 .contact(
                         new Contact(
                                 "Raul Santana",

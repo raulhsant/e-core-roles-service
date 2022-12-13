@@ -1,6 +1,6 @@
 # The Project
 
-This is a project proposed as a challenge from the E-Core/Tempo recruitment process.
+This is a project proposed as a challenge from the e-Core recruitment process.
 
 The idea is to provide a service to enhance the existing roles and teams services, with the concept of team roles.
 
