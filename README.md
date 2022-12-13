@@ -2,7 +2,7 @@
 
 This is a project proposed as a challenge from the E-Core/Tempo recruitment process.
 
-The idea is to provide a service to enhance the existing roles e teams services, with the concept of team roles.
+The idea is to provide a service to enhance the existing roles and teams services, with the concept of team roles.
 
 The roles can be associated to team members, that is, a member x on a team y can have an associated role.  
 
