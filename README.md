@@ -48,7 +48,7 @@ with a specific role* call.
 In total 6 endpoints were implemented, resulting in 2 extra ones:
 
 1. List existing roles
-2. Return current role for membership
+2. Return a membership (that contains the role information)
 
 The first one is basically a helper interface to better understand which roles already exists on the database.
 
@@ -101,6 +101,15 @@ If you want to run unit and mutation tests with a single command, you can use:
 
 ``` shell script
 $ make test
+```
+
+#### Unit and Integration Tests
+
+If you want to run unit and integration tests you can use the maven verify lifecycle, that has been wrapped on the 
+makefile as:
+
+``` shell script
+$ make verify
 ```
 
 ## Running the project

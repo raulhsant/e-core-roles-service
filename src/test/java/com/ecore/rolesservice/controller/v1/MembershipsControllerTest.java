@@ -88,7 +88,7 @@ class MembershipsControllerTest {
     }
 
     @Test
-    void findRoleForMembership() {
+    void findMembership() {
         final var teamId = TestDataGen.getString();
         final var userId = TestDataGen.getString();
         final var membership = TestDataGen.getObject(Membership.class);
@@ -97,7 +97,7 @@ class MembershipsControllerTest {
         when(membershipService.getMembership(anyString(), anyString())).thenReturn(membership);
         when(membershipMapper.toMembershipResponseBody(any(Membership.class))).thenReturn(membershipResponse);
 
-        final var response = controller.findRoleForMembership(teamId, userId);
+        final var response = controller.findMembership(teamId, userId);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(membershipResponse);

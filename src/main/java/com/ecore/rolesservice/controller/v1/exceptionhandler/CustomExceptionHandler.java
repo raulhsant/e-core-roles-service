@@ -45,13 +45,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> errors = getErrors(ex);
 
         logException(ex);
-        var errorDto = ErrorDto.builder().errors(errors).message(message).build();
+        final var errorDto = ErrorDto.builder().errors(errors).message(message).build();
         return handleExceptionInternal(ex, errorDto, headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({HttpException.class})
     public ResponseEntity<Object> handleExpectedHttpExecptions(HttpException ex) {
-        var errorDto = ErrorDto.builder()
+        final var errorDto = ErrorDto.builder()
                 .message(ex.getLocalizedMessage())
                 .errors(Collections.singletonList(ex.getError()))
                 .build();
@@ -61,8 +61,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     protected ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-        var errors = Collections.singletonList("An unexpected Error occurred");
-        var errorDto = ErrorDto.builder()
+        final var errors = Collections.singletonList("An unexpected Error occurred");
+        final var errorDto = ErrorDto.builder()
                 .message(ex.getLocalizedMessage())
                 .errors(errors)
                 .build();

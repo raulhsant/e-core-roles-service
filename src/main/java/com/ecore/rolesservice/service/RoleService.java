@@ -20,21 +20,15 @@ public class RoleService {
     public Role createRole(@NotBlank String roleName) {
         Optional<Role> roleOptional = roleRepository.findById(roleName);
 
-        if (roleOptional.isPresent()) {
-            return roleOptional.get();
-        }
-
-        var role = Role.builder()
+        return roleOptional.orElseGet(() -> roleRepository.save(Role.builder()
                 .name(roleName)
                 .createdAt(OffsetDateTime.now())
-                .build();
-
-        return roleRepository.save(role);
+                .build()));
     }
 
     public List<Membership> findMemberships(String roleName) {
-        Optional<Role> role = roleRepository.findById(roleName);
-        return role.orElse(new Role()).getMemberships();
+        Optional<Role> roleOptional = roleRepository.findById(roleName);
+        return roleOptional.orElse(new Role()).getMemberships();
     }
 
     public List<Role> listRoles() {

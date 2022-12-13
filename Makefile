@@ -2,10 +2,10 @@ clean:
 	./mvnw clean
 
 unit-test:
-	make clean && ./mvnw test -Punit-test
+	./mvnw clean test
 
-integration-test:
-	make clean && ./mvnw test -Pintegration-test
+verify:
+	./mvnw clean verify
 
 mutation-test:
 	./mvnw test-compile org.pitest:pitest-maven:mutationCoverage

@@ -2,6 +2,7 @@ package com.ecore.rolesservice.controller.v1;
 
 
 import com.ecore.rolesservice.mapper.MembershipMapper;
+import com.ecore.rolesservice.model.Membership;
 import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import com.ecore.rolesservice.service.MembershipService;
 import io.swagger.annotations.Api;
@@ -14,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/membership")
+@RequestMapping("/v1/memberships")
 @Api(value = "memberships", tags = "Memberships")
 @Tag(name = "Memberships", description = "Membership Management")
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class MembershipsController {
     public ResponseEntity<MembershipResponseBody> assignRole(@PathVariable("teamId") String teamId,
                                                              @PathVariable("userId") String userId,
                                                              @PathVariable("role") String role) {
-        var membership = membershipService.assignRole(role, teamId, userId);
+        Membership membership = membershipService.assignRole(role, teamId, userId);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }
 
@@ -44,11 +45,11 @@ public class MembershipsController {
                 .orElseGet(() -> ResponseEntity.noContent().build());
     }
 
-    @ApiOperation(value = "Return current role for membership")
+    @ApiOperation(value = "Return a membership")
     @GetMapping(path = "/{teamId}/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MembershipResponseBody> findRoleForMembership(@PathVariable("teamId") String teamId,
-                                                                        @PathVariable("userId") String userId) {
-        var membership = membershipService.getMembership(teamId, userId);
+    public ResponseEntity<MembershipResponseBody> findMembership(@PathVariable("teamId") String teamId,
+                                                                 @PathVariable("userId") String userId) {
+        Membership membership = membershipService.getMembership(teamId, userId);
         return ResponseEntity.ok(membershipMapper.toMembershipResponseBody(membership));
     }
 }

@@ -11,5 +11,5 @@ import org.springframework.test.context.ContextConfiguration;
 )
 @ActiveProfiles("it")
 @ContextConfiguration(initializers = MariaDBContextInitializer.class)
-public class BaseIntegrationTest {
+public abstract class AbstractIT {
 }

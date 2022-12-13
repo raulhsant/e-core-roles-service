@@ -3,6 +3,7 @@ package com.ecore.rolesservice.controller.v1;
 import com.ecore.rolesservice.mapper.MembershipMapper;
 import com.ecore.rolesservice.mapper.RoleMapper;
 import com.ecore.rolesservice.model.Membership;
+import com.ecore.rolesservice.model.Role;
 import com.ecore.rolesservice.model.dto.membership.MembershipResponseBody;
 import com.ecore.rolesservice.model.dto.role.RoleRequestBody;
 import com.ecore.rolesservice.model.dto.role.RoleResponseBody;
@@ -32,14 +33,14 @@ public class RolesController {
     @ApiOperation(value = "Add a new role")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleResponseBody> createRole(@RequestBody @Validated RoleRequestBody requestBody) {
-        var role = roleService.createRole(requestBody.getName());
+        Role role = roleService.createRole(requestBody.getName());
         return ResponseEntity.ok(roleMapper.toRoleResponseBody(role));
     }
 
     @ApiOperation(value = "List existing roles")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RoleResponseBody>> listRoles() {
-        var roles = roleService.listRoles();
+        List<Role> roles = roleService.listRoles();
         return ResponseEntity.ok(roleMapper.toRoleResponseBodyList(roles));
     }
 

@@ -29,7 +29,7 @@ public class TeamService {
 
     @SneakyThrows
     public boolean isNotTeamMember(String userId, String teamId) {
-        var team = this.getTeam(teamId);
+        TeamResponseBody team = this.getTeam(teamId);
         return !team.getTeamMemberIds().contains(userId);
     }
 
@@ -38,7 +38,7 @@ public class TeamService {
                 .path("/{teamId}")
                 .build(teamId);
 
-        var request = HttpRequest.newBuilder(uri).GET().build();
+        HttpRequest request = HttpRequest.newBuilder(uri).GET().build();
 
         HttpResponse<Supplier<TeamResponseBody>> response = httpClient.send(request, new JsonBodyHandler<>(TeamResponseBody.class));
         return getTeamResponseBody(response);

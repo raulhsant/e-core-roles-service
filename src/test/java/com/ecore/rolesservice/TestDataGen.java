@@ -18,9 +18,13 @@ public class TestDataGen {
     }
 
     public static <T> List<T> getListOfObject(Class<T> type) {
+        return getListOfObject(type, random.nextInt(MAX_LIST_SIZE));
+    }
+
+    public static <T> List<T> getListOfObject(Class<T> type, int size) {
         List<T> list = new ArrayList<>();
 
-        for (int i = 0; i < random.nextInt(MAX_LIST_SIZE); i++) {
+        for (int i = 0; i < size; i++) {
             list.add(getObject(type));
         }
 
