@@ -2,11 +2,12 @@
 
 This is a project proposed as a challenge from the e-Core recruitment process.
 
-The idea is to provide a service to enhance the existing roles and teams services, with the concept of team roles.
+The idea is to provide a service  that implements the concept of team roles, enhancing the existing roles and teams 
+services.
 
 The roles can be associated to team members, that is, a member x on a team y can have an associated role.  
 
-There are three predefined roles **Developer**, **Product Owner** and **Tester**, in which **Developer** of the 
+There are three predefined roles **Developer**, **Product Owner** and **Tester**, in which **Developer** is the 
 default one.
 
 The service should be able to:
@@ -22,7 +23,7 @@ http://localhost:8080/api/roles-service/swagger-ui/index.html
 ## The Approach
 
 ### Model
-To allow every member to have multiple roles but only one per team, the member-team pair was modele as a Membership object, composed by the before mentioned pair and a role.
+To allow every member to have multiple roles but only one per team, the member-team pair was modeled as a Membership object, composed of the before-mentioned pair and a role.
 
 ### Design Decisions
 
@@ -34,10 +35,10 @@ This decision was based on the assumption that if someone wants to get the role 
 should already exist on the client side and, if it does not exist, it's the responsibility of the client to enrich 
 what they already have with the data that matters to them.
 
-It also renders the synchronization on the three systems databases unnecessary, since every information should be 
-retrieved from its owner respectfully by the client.
+It also renders the synchronization on the three systems databases unnecessary, since every piece of information 
+should be retrieved from its owner respectfully by the client.
 
-On regards of the default role, this approach present a caveat. The return of the prerequisite *4* (memberships of 
+In regard to the default role, this approach presents a caveat. The return of the prerequisite *4* (memberships of 
 a role) for the default role **Developer** will *not* return every membership that has a developer role, just the 
 ones explicitly declared as so. This way, a membership can be returned by the *Look up a role for a team member* 
 call with the developer role, and not be present on the developer role membership list of the *Look up every member 
@@ -50,7 +51,7 @@ In total 6 endpoints were implemented, resulting in 2 extra ones:
 1. List existing roles
 2. Return a membership (that contains the role information)
 
-The first one is basically a helper interface to better understand which roles already exists on the database.
+The first one is basically a helper interface to better understand which roles already exist on the database.
 
 The second one is an interpretation of the *Look up a role for a team member* but without having to define a role.
 
@@ -162,6 +163,10 @@ The containers and locally exposed ports are:
 3. roles_service: The roles service itself. It's exposed on port `8080`. You can access it's swagger-ui by clicking
    [here](http://localhost:8080/api/roles-service/swagger-ui/index.html)
 
+## Testing the Api
+
+After executing the project, if desired it's possible to manually test the api either by using the server own 
+swagger-ui page or by importing on postman the collection available on the `postman_collection.json` file.
 
 ## Improvements for Team or User Services
 
