@@ -47,7 +47,7 @@ with a specific role* call.
 
 ### Extra endpoints
 
-In total 6, endpoints were implemented, resulting in 2 extra ones:
+In total 6 endpoints were implemented, resulting in 2 extra ones:
 
 1. List existing roles.
 2. Return a membership (that contains the role information).
@@ -62,8 +62,8 @@ The second one is an interpretation of the *Look up a role for a team member* bu
 For this project, I decided to use a relational database (MariaDB), in part because I thought it made more sense and in 
 part to step out of my comfort zone of working with DynamoDB. 
 
-The great advantage of DynamoDB over MariaDB in this case would be the auto-scaling/on demand throughput option, 
-that allows really fast horizontal scaling and key based fast retrieving of data, but I don't think it would make a 
+The great advantage of DynamoDB over MariaDB, in this case, would be the auto-scaling/on-demand throughput option, 
+which allows really fast horizontal scaling and key-based fast retrieving of data, but I don't think it would make a 
 lot of difference, even in the long run, when the throughput would get higher a cache solution would be enough to keep 
 the SQL database in use.
 
@@ -168,17 +168,17 @@ The containers and locally exposed ports are:
 
 ## Testing the API
 
-After executing the project, if desired, it's possible to manually test the API either by using the server own
+After executing the project, if desired, it's possible to manually test the API either by using the server's own
 swagger-ui page or by importing the collection from the `postman_collection.json` file in Postman.
 
 ## Improvements for Team or User Services
 
-I didn't use many of the provided services because I chose not to enrich my membership. 
+I didn't use much of the provided services because I chose not to enrich my membership. 
 Besides that, for the validation of the membership (the team exists and the user is a member of it), I saw that, if 
 there is no team for the given id, the API returns 200 with "null".
 
 It would be better to return either a 404 or a 204, indicating that the team could not be found or there is no 
 content to return.
 
-Another good improvement would be to add a little intelligence to the services and have an endpoint to check if a 
-user is a member of a team.
+Another good improvement would be to add a little intelligence to the services with the implementation of an 
+endpoint to check if a user is a member of a given team.
